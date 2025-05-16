@@ -112,7 +112,7 @@ const SearchPage = () => {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', backgroundColor: '#f0f4f8' }}>
+    <Box sx={{ minHeight: '100vh', backgroundColor: '#f0f4f8' }}><br></br><br></br>
       <Box
         sx={{
           backgroundColor: '#1565c0',

@@ -13,10 +13,10 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
+import { useAuth } from '../auth/AuthContext';
 
 const COLORS = ['#1565c0', '#2e7d32', '#f44336', '#ff9800', '#9c27b0', '#00bcd4', '#8bc34a'];
 
-// Pie chart data: number of countries by region
 const getRegionData = (countries) => {
   const regionCount = countries.reduce((acc, country) => {
     const region = country.region || 'Unknown';
@@ -29,7 +29,6 @@ const getRegionData = (countries) => {
   }));
 };
 
-// Pie chart data: top 5 countries by population
 const getPopulationData = (countries) => {
   return [...countries]
     .sort((a, b) => b.population - a.population)
@@ -40,7 +39,6 @@ const getPopulationData = (countries) => {
     }));
 };
 
-// Population stats for summary
 const getPopulationStats = (countries) => {
   const total = countries.reduce((sum, c) => sum + c.population, 0);
   const average = total / countries.length;
@@ -55,87 +53,112 @@ const CountriesPage = ({ countries, toggleFavorite }) => {
   const populationData = getPopulationData(countries);
   const popStats = getPopulationStats(countries);
 
+  const { user } = useAuth();
+
+   
+  const isFavorite = (code) => {
+    return user?.favorites?.includes(code);
+  };
+
   return (
-    <Box p={4}>
-      <Typography variant="h4" gutterBottom>
+    <Box
+      p={4}
+      sx={{
+        minHeight: '100vh',
+        background: 'linear-gradient(to bottom right, #e0e0e0, #bbdefb)',
+      }}
+    ><br></br><br></br>
+      <Typography variant="h4" gutterBottom align="center">
         Countries ({countries.length})
       </Typography>
 
-      {/* Chart and Summary in One Row */}
-      <Grid container spacing={4} sx={{ mb: 4 }}>
-        {/* Charts Column */}
-        <Grid item xs={12} md={8}>
-          <Grid container spacing={2}>
+      <Grid container spacing={6} justifyContent="center" alignItems="center" sx={{ mb: 6 }}>
+        <Grid item xs={12} md={7}>
+          <Grid container spacing={4}>
             <Grid item xs={12} sm={6}>
-              <Typography variant="h6" gutterBottom>Country Count by Region</Typography>
-              <Box sx={{ height: 300 }}>
-                <ResponsiveContainer>
-                  <PieChart>
-                    <Pie
-                      data={regionData}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={100}
-                      label
-                    >
-                      {regionData.map((entry, index) => (
-                        <Cell key={`region-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
+              <Box
+                sx={{
+                  backgroundColor: '#fff',
+                  borderRadius: 3,
+                  p: 2,
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                }}
+              >
+                <Typography variant="h6" gutterBottom align="center">
+                  Country Count by Region
+                </Typography>
+                <Box sx={{ height: 300, width: 500 }}>
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        data={regionData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={100}
+                        label
+                      >
+                        {regionData.map((entry, index) => (
+                          <Cell key={`region-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </Box>
               </Box>
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <Typography variant="h6" gutterBottom>Top 5 Populous Countries</Typography>
-              <Box sx={{ height: 300 }}>
-                <ResponsiveContainer>
-                  <PieChart>
-                    <Pie
-                      data={populationData}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={100}
-                      label={({ name }) => name}
-                    >
-                      {populationData.map((entry, index) => (
-                        <Cell key={`pop-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip formatter={(value) => value.toLocaleString()} />
-                    <Legend />
-                  </PieChart>
-                </ResponsiveContainer>
+              <Box
+                sx={{
+                  backgroundColor: '#fff',
+                  borderRadius: 3,
+                  p: 2,
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+                }}
+              >
+                <Typography variant="h6" gutterBottom align="center">
+                  Top 5 Populous Countries
+                </Typography>
+                <Box sx={{ height: 300, width: 500 }}>
+                  <ResponsiveContainer>
+                    <PieChart>
+                      <Pie
+                        data={populationData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={100}
+                        label={({ name }) => name}
+                      >
+                        {populationData.map((entry, index) => (
+                          <Cell key={`pop-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip formatter={(value) => value.toLocaleString()} />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </Box>
               </Box>
             </Grid>
           </Grid>
         </Grid>
-
-        {/* Summary Column */}
-        <Grid item xs={12} md={4}>
-          <Typography variant="h6" gutterBottom>Population Summary</Typography>
-          <Typography><strong>Total Population:</strong> {popStats.total.toLocaleString()}</Typography>
-          <Typography><strong>Average Population:</strong> {Math.round(popStats.average).toLocaleString()}</Typography>
-          <Typography><strong>Most Populous:</strong> {popStats.mostPopulous.name?.common} ({popStats.mostPopulous.population.toLocaleString()})</Typography>
-          <Typography><strong>Least Populous:</strong> {popStats.leastPopulous.name?.common} ({popStats.leastPopulous.population.toLocaleString()})</Typography>
-        </Grid>
       </Grid>
 
-      {/* All Country Cards */}
-      <Box display="flex" flexWrap="wrap">
+      {/* ✅ Country Cards */}
+      <Box display="flex" flexWrap="wrap" justifyContent="center">
         {countries.map((country) => (
           <CountryCard
             key={country.cca3}
             country={country}
-            isFavorite={false}
+            isFavorite={isFavorite(country.cca3)} // ✅ Fix here
             toggleFavorite={toggleFavorite}
+            showStar={!!user}
           />
         ))}
       </Box>

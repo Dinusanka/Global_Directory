@@ -10,6 +10,8 @@ import {
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
+
 
 // Define region colors
 const regionColors = {
@@ -22,8 +24,9 @@ const regionColors = {
   default: '#E0E0E0',
 };
 
-const CountryCard = ({ country, isFavorite, toggleFavorite }) => {
+const CountryCard = ({ country, isFavorite, toggleFavorite, showStar }) => {
   const navigate = useNavigate();
+  const { user } = useAuth(); 
   const regionColor = regionColors[country.region] || regionColors.default;
 
   const handleCardClick = () => {
@@ -55,14 +58,20 @@ const CountryCard = ({ country, isFavorite, toggleFavorite }) => {
           <Typography variant="h6" fontWeight="bold">
             {country.name.common}
           </Typography>
-          <IconButton
-            onClick={(e) => {
-              e.stopPropagation(); // prevent navigation when clicking star
-              toggleFavorite(country);
-            }}
-          >
-            {isFavorite ? <StarIcon color="warning" /> : <StarBorderIcon />}
-          </IconButton>
+          {showStar && (
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation(); // prevent navigation when clicking star
+                toggleFavorite(country);
+              }}
+            >
+              {isFavorite ? (
+                <StarIcon sx={{ color: '#fbc02d' }} />
+              ) : (
+                <StarBorderIcon />
+              )}
+            </IconButton>
+          )}
         </Box>
         <Typography variant="body2">Region: {country.region}</Typography>
         <Typography variant="body2">

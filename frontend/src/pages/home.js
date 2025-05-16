@@ -5,23 +5,29 @@ import FilterButtons from '../components/FilterButtons';
 import CountryCard from '../components/CountryCard';
 import { Box, Typography, Grid, Fade } from '@mui/material';
 import FlagCountryCard from '../components/FlagCountryCard';
-
+import { useAuth } from '../auth/AuthContext';
 const Home = () => {
     
     const [countries, setCountries] = useState([]);
     const [filteredCountries, setFilteredCountries] = useState([]);
     const [showMap, setShowMap] = useState(false);
+ const { logout } = useAuth();
+   useEffect(() => {
+  const fetchCountries = async () => {
+    try {
+      const response = await fetch('https://restcountries.com/v3.1/all');
+      const data = await response.json();
+      setCountries(data);
+      setFilteredCountries(data);
+      setShowMap(true); // trigger map fade-in
+    } catch (error) {
+      console.error('Error fetching countries:', error);
+    }
+  };
 
-    useEffect(() => {
-        fetch('https://restcountries.com/v3.1/all')
-            .then((response) => response.json())
-            .then((data) => {
-                setCountries(data);
-                setFilteredCountries(data);
-                setShowMap(true); // trigger map fade-in
-            })
-            .catch((error) => console.error('Error fetching countries:', error));
-    }, []);
+  fetchCountries(); // Call the async function
+}, []);
+
 
     const handleSearch = (searchTerm) => {
         const filtered = countries.filter((country) =>
@@ -40,7 +46,7 @@ const Home = () => {
             setFilteredCountries(filtered);
         }
     };
-
+ const { user } = useAuth();
     return (
         <Box sx={{ minHeight: '100vh', backgroundColor: '#f0f4f8' }}>
              
@@ -52,9 +58,16 @@ const Home = () => {
                     textAlign: 'center',
                     py: 6,
                 }}
-            >
+            ><br></br><br></br>
                 <Typography variant="h4" fontWeight="bold">
+                        {user && (
+            <Typography sx={{ color: '#fff', fontWeight: 'bold' }}>
+              Hi, {user.username}
+            </Typography>
+          )}
+        
                     Discover 250+ countries across the planet
+
                 </Typography>
             </Box>
 
@@ -97,7 +110,7 @@ const Home = () => {
   {filteredCountries.map((country) => (
     <FlagCountryCard country={country} key={country.cca3} />
   ))}
-</Box>
+        </Box>
             </Grid>
         </Box>
     );
