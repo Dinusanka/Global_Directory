@@ -111,9 +111,7 @@ rm -rf node_modules package‑lock.json
 npm install
 ```
 
-### CORS pre‑flight failures in older browsers
 
-REST Countries sends proper CORS headers; however, Safari 13 occasionally caches 301 redirects. Hard‑reload or disable the cache while dev‑testing.
 
  
 
