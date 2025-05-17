@@ -77,7 +77,7 @@ const SearchPage = () => {
           );
         }
 
-        // If currency filter
+        
         if (filters.currency) {
           promises.push(
             fetch(`https://restcountries.com/v3.1/currency/${filters.currency}`).then(

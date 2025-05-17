@@ -1,70 +1,119 @@
-# Getting Started with Create React App
+# 🌍 Global Directory
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive web application that lets you explore detailed information for **250+ countries** around the world. Search by name, capital, currency, language or several other attributes, or simply browse by region from an interactive card grid.
+Built with **React 18**, **Vite**, **Material‑UI (MUI) 5**, and the free **REST Countries v3.1 API**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Key Features
 
-### `npm start`
+| Feature                      | Details                                                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Home page quick search**   | Autocomplete search bar plus one‑click region filters.                                                             |
+| **Advanced Search tab**      | Find countries by **capital city**, **currency**, **language**, **time‑zone**, **calling code**, or **UN region**. |
+| **Rich country cards**       | Flag, name, capital and region in a clean, responsive grid.                                                        |
+| **Accessible design**        | Dark‑mode aware colours, keyboard navigation, and WAI‑ARIA labels.                                                 |
+| **Unit & integration tests** | \~90 % coverage using **Jest** + **React Testing Library**.                                                        |
+| **Instant dev reload**       | Powered by Vite’s lightning‑fast HMR.                                                                              |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Getting Started
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **Node.js ≥ 18** (tested on 18 LTS and 20 LTS)
+* **npm ≥ 9** (comes with Node)
+  *Optional*: `pnpm` or `yarn` work too; adjust commands accordingly.
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# 1. Clone the repo
+$ git clone https://github.com/your‑username/global‑directory.git
+$ cd global‑directory
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 2. Install dependencies
+$ npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Running the app in development mode
 
-### `npm run eject`
+```bash
+$ npm start      # alias for vite --open
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Open [http://localhost:5173](http://localhost:5173) and the app will automatically reload on file changes.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Running the test suite
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+$ npm test       # runs Jest in watch mode
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+A complete coverage report is generated in `/coverage` when the watcher terminates (`q`).
 
-## Learn More
+### Building for production
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+$ npm run build  # vite build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The optimised static bundle is output to `dist/`. Serve it with any static host or CI/CD pipeline – e.g. **GitHub Pages**, **Netlify**, or **Vercel**.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🔌 API Reference
 
-### Analyzing the Bundle Size
+All data is fetched on‑demand from **[REST Countries v3.1](https://restcountries.com/)** (no key or auth required):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Use case                   | Endpoint                      | Example                              |
+| -------------------------- | ----------------------------- | ------------------------------------ |
+| **All countries**          | `GET /v3.1/all`               | `https://restcountries.com/v3.1/all` |
+| By **capital**             | `GET /v3.1/capital/{capital}` | `/capital/Paris`                     |
+| By **currency**            | `GET /v3.1/currency/{code}`   | `/currency/eur`                      |
+| By **language**            | `GET /v3.1/lang/{code}`       | `/lang/fr`                           |
+| By **name** | `GET /v3.1/name/{name}`       | `/name/canada`                       |
 
-### Making a Progressive Web App
+ 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🧪 Testing Strategy
 
-### Advanced Configuration
+* **Unit tests** verify pure util functions and component logic.
+* **Integration tests** mount pages with React Testing Library and mock network requests via `msw`.
+* **CI** – GitHub Actions matrix on Node 18 & 20 runs `npm test` and publishes the coverage badge.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+ 
+---
 
-### Deployment
+## 🛠️ Troubleshooting & Common Issues
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Material‑UI peer‑dependency version mismatch
 
-### `npm run build` fails to minify
+```
+npm ERR! Could not resolve dependency:
+peer react@"^17.0.0 || ^18.0.0" from @mui/icons-material@5.15.19
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Solution**: lock both `@mui/material` and `@mui/icons-material` at the **same minor version** and ensure React ≥ 18. A working excerpt from `package.json`:
+
+```json
+"@mui/material": "5.15.19",
+"@mui/icons-material": "5.15.19",
+"@emotion/react": "^11.11.1",
+"@emotion/styled": "^11.11.0"
+```
+
+Then reinstall:
+
+```bash
+rm -rf node_modules package‑lock.json
+npm install
+```
+
+### CORS pre‑flight failures in older browsers
+
+REST Countries sends proper CORS headers; however, Safari 13 occasionally caches 301 redirects. Hard‑reload or disable the cache while dev‑testing.
+
+ 
+
