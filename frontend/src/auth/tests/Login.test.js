@@ -74,7 +74,7 @@ describe('Login component', () => {
     expect(mockLogin).toHaveBeenCalledWith('testUser', 'testPass');
     expect(toast.success).toHaveBeenCalledWith('Login successful!');
 
-    // wait for navigate to be called after 1.5 seconds
+  
     await waitFor(() => {
       expect(mockNavigate).toHaveBeenCalledWith('/');
     }, { timeout: 2000 });

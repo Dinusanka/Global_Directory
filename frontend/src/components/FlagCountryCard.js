@@ -12,7 +12,7 @@ const FlagCountryCard = ({ country }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/country/${country.cca3}`, { state: { country } }); // Pass data via state
+    navigate(`/country/${country.cca3}`, { state: { country } });  
   };
 
   return (

@@ -12,7 +12,7 @@ import {
   Grid,
 } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useAuth } from '../auth/AuthContext'; // 🔹 Make sure this path is correct
+import { useAuth } from '../auth/AuthContext';  
 
 const backgroundImage =
   'https://t3.ftcdn.net/jpg/08/22/43/50/360_F_822435027_KAkPbZA0au36KkOdmL1EHRNH5ajkVKv0.jpg';
@@ -20,7 +20,7 @@ const backgroundImage =
 const CountryDetailPage = () => {
   const { state } = useLocation();
   const { code } = useParams();
-  const { user } = useAuth(); // 🔹 Access user from AuthContext
+  const { user } = useAuth();  
 
   const country = state?.country;
 
@@ -32,8 +32,8 @@ const CountryDetailPage = () => {
     );
   }
 
-  // 🔸 Check if this country is a favorite
-  const isFavorite = user?.favorites?.includes(country.cca2); // Adjust to your data structure
+ 
+  const isFavorite = user?.favorites?.includes(country.cca2);  
 
   return (
     

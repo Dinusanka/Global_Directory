@@ -29,10 +29,10 @@ test('successful login redirects (mock)', () => {
   window.location = { href: '' };
   renderWithAuth(<Login />);
   fireEvent.change(screen.getByPlaceholderText(/Username/i), {
-    target: { value: 'admin' },
+    target: { value: 'Dinus' },
   });
   fireEvent.change(screen.getByPlaceholderText(/Password/i), {
-    target: { value: 'admin' },
+    target: { value: 'Dinus' },
   });
   fireEvent.click(screen.getByText(/Login/i));
   expect(window.location.href).toBe('/');

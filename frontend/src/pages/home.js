@@ -19,13 +19,13 @@ const Home = () => {
       const data = await response.json();
       setCountries(data);
       setFilteredCountries(data);
-      setShowMap(true); // trigger map fade-in
+      setShowMap(true); 
     } catch (error) {
       console.error('Error fetching countries:', error);
     }
   };
 
-  fetchCountries(); // Call the async function
+  fetchCountries(); 
 }, []);
 
 
@@ -61,14 +61,14 @@ const Home = () => {
             ><br></br><br></br>
                 <Typography variant="h4" fontWeight="bold">
                         {user && (
-            <Typography sx={{ color: '#fff', fontWeight: 'bold' }}>
+            <Typography variant="h4" sx={{ color: '#fff', fontWeight: 'bold' }}>
               Hi, {user.username}
             </Typography>
           )}
         
                     Discover 250+ countries across the planet
 
-                </Typography>
+            </Typography>
             </Box>
 
             <SearchBar onSearch={handleSearch} />
@@ -96,11 +96,11 @@ const Home = () => {
   sx={{
     display: 'grid',
     gridTemplateColumns: {
-      xs: 'repeat(1, 1fr)',     // 1 column on extra-small screens
-      sm: 'repeat(2, 1fr)',     // 2 columns on small screens
-      md: 'repeat(3, 1fr)',     // 3 columns on medium
-      lg: 'repeat(5, 1fr)',     // 5 columns on large screens
-      xl: 'repeat(5, 1fr)',     // 5 on extra-large too
+      xs: 'repeat(1, 1fr)',      
+      sm: 'repeat(2, 1fr)',      
+      md: 'repeat(3, 1fr)',     
+      lg: 'repeat(5, 1fr)',      
+      xl: 'repeat(5, 1fr)',      
     },
     gap: 2,
     px: 4,

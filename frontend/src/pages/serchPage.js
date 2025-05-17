@@ -22,7 +22,7 @@ const SearchPage = () => {
     callingCode: '',
     capital: '',
     independent: false,
-    cca2: '', // new filter for country ISO2 code
+    cca2: '', 
   });
 
   const [timezones, setTimezones] = useState([]);
@@ -33,7 +33,7 @@ const SearchPage = () => {
     fetch('https://restcountries.com/v3.1/all')
       .then((res) => res.json())
       .then((data) => {
-        setAllCountries(data); // save all countries for autocomplete
+        setAllCountries(data);  
 
         setTimezones(
           Array.from(new Set(data.flatMap((c) => c.timezones || []))).sort()
@@ -68,7 +68,7 @@ const SearchPage = () => {
         // Collect promises for each filter
         const promises = [];
 
-        // If capital filter
+        //  capital filter
         if (filters.capital) {
           promises.push(
             fetch(`https://restcountries.com/v3.1/capital/${filters.capital}`).then(
@@ -86,7 +86,7 @@ const SearchPage = () => {
           );
         }
 
-        // If language filter
+        //  language filter
         if (filters.language) {
           promises.push(
             fetch(`https://restcountries.com/v3.1/lang/${filters.language}`).then(
@@ -95,27 +95,25 @@ const SearchPage = () => {
           );
         }
 
-        // If no filters, fetch all
+        //  fetch all
         if (promises.length === 0) {
           const res = await fetch('https://restcountries.com/v3.1/all');
           const data = await res.json();
           setCountries(Array.isArray(data) ? data : []);
           return;
         }
-
-        // Wait all API calls
+ 
         const results = await Promise.all(promises);
 
-        // Filter out any non-array or error responses
+       
         const validResults = results.filter(Array.isArray);
 
         if (validResults.length === 0) {
-          setCountries([]); // no valid results at all
+          setCountries([]); // no valid results 
           return;
         }
 
-        // Intersect results by cca3 (unique country code)
-        // Start from first result set
+       
         let intersected = validResults[0];
 
         for (let i = 1; i < validResults.length; i++) {

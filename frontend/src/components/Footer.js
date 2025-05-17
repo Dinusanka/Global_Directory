@@ -18,7 +18,7 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="lg">
-        {/* Logo and name */}
+       
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
           <PublicIcon sx={{ mr: 1, fontSize: 30, color: '#a5d6a7' }} />
           <Typography variant="h6" fontWeight="bold">
@@ -26,14 +26,14 @@ const Footer = () => {
           </Typography>
         </Box>
 
-        {/* Description */}
+        
         <Typography variant="body2" align="center" sx={{ mb: 2 }}>
           Explore the world with ease — find countries, details, and more in one global place.
         </Typography>
 
       
 
-        {/* Copyright */}
+       
         <Typography variant="body2" align="center" sx={{ color: '#ccc' }}>
           © {new Date().getFullYear()} Global Directory. All rights reserved.
         </Typography>

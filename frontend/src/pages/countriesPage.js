@@ -150,7 +150,7 @@ const CountriesPage = ({ countries, toggleFavorite }) => {
         </Grid>
       </Grid>
 
-      {/* ✅ Country Cards */}
+      {/* Country Cards */}
       <Box display="flex" flexWrap="wrap" justifyContent="center">
         {countries.map((country) => (
           <CountryCard
