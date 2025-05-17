@@ -36,6 +36,7 @@ const CountryDetailPage = () => {
   const isFavorite = user?.favorites?.includes(country.cca2); // Adjust to your data structure
 
   return (
+    
     <Box
       p={4}
       sx={{
@@ -48,8 +49,8 @@ const CountryDetailPage = () => {
         justifyContent: 'center',
         alignItems: 'flex-start',
       }}
-    >
-      <Box maxWidth="1200px" width="100%" borderRadius={3} boxShadow={4} p={4}>
+    ><br></br><br></br>
+      <Box marginTop={8} maxWidth="1200px" width="100%" borderRadius={3} boxShadow={4} p={4}>
         <Grid container spacing={4}>
           {/* Left Column: Details */}
           <Grid item xs={12} md={6}>
