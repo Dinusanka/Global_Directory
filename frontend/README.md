@@ -18,7 +18,7 @@ Built with **React 18**, **Vite**, **Material‑UI (MUI) 5**, and the free **R
 
 ---
 
-## 🚀 Getting Started
+##   Getting Started
 
 ### Prerequisites
 
@@ -43,7 +43,7 @@ $ npm install
 $ npm start      # alias for vite --open
 ```
 
-Open [http://localhost:5173](http://localhost:5173) and the app will automatically reload on file changes.
+Open [http://localhost:3000](http://localhost:5173) and the app will automatically reload on file changes.
 
 ### Running the test suite
 
@@ -63,7 +63,7 @@ The optimised static bundle is output to `dist/`. Serve it with any static host 
 
 ---
 
-## 🔌 API Reference
+##   API Reference
 
 All data is fetched on‑demand from **[REST Countries v3.1](https://restcountries.com/)** (no key or auth required):
 
@@ -77,7 +77,7 @@ All data is fetched on‑demand from **[REST Countries v3.1](https://restcoun
 
  
 
-## 🧪 Testing Strategy
+##   Testing Strategy
 
 * **Unit tests** verify pure util functions and component logic.
 * **Integration tests** mount pages with React Testing Library and mock network requests via `msw`.
